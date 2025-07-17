@@ -30,7 +30,7 @@ class NotesHandler {
   async getNotesHandler(request, h) {
     const notes = await this._service.getNotes();
     const response = h.response({
-      status: 'Success',
+      status: 'success',
       data: {
         notes,
       },
@@ -44,7 +44,7 @@ class NotesHandler {
     const note = await this._service.getNoteById(id);
 
     const response = h.response({
-      status: 'Success',
+      status: 'success',
       data: {
         note,
       },
@@ -59,7 +59,7 @@ class NotesHandler {
     await this._service.editNoteById(id, request.payload);
 
     return {
-      status: 'Succes',
+      status: 'success',
       message: 'Catatan berhasil diperbarui',
     };
   }
@@ -69,7 +69,7 @@ class NotesHandler {
     await this._service.deleteNoteById(id);
 
     return {
-      status: 'Succes',
+      status: 'success',
       message: 'Catatan berhasil dihapus',
     };
   }
