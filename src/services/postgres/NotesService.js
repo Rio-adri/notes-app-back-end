@@ -33,11 +33,11 @@ class NotesService {
     return result.rows.map(mapDBToModel);
   }
 
-  async getNoteById (id) {
-    const query ={
+  async getNoteById(id) {
+    const query = {
       text: 'SELECT * FROM notes WHERE id=$1',
-      values:[id],
-    }
+      values: [id],
+    };
 
     const result = await this._pool.query(query);
 
@@ -47,13 +47,13 @@ class NotesService {
     return result.rows.map(mapDBToModel)[0];
   }
 
-  async editNoteById (id, { title, body, tags }) {
+  async editNoteById(id, { title, body, tags }) {
     const updateAt = new Date().toISOString();
 
     const query = {
       text: 'UPDATE notes SET title=$1, body=$2, tags=$3, update_at=$4 WHERE id=$5 RETURNING id',
-      values:[title, body, tags, updateAt, id],
-    }
+      values: [title, body, tags, updateAt, id],
+    };
 
     const result = await this._pool.query(query);
 
@@ -62,13 +62,13 @@ class NotesService {
     }
 
     return result;
-  } 
+  }
 
   async deleteNoteById(id) {
     const query = {
-      text: "DELETE FROM notes WHERE id=$1 RETURNING id",
-      values: [id]
-    }
+      text: 'DELETE FROM notes WHERE id=$1 RETURNING id',
+      values: [id],
+    };
 
     const result = await this._pool.query(query);
 
