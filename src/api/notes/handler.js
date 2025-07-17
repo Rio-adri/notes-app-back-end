@@ -1,3 +1,5 @@
+const autoBind = require('auto-bind');
+
 class NotesHandler {
   constructor(service, validator) {
     this._service = service;
