@@ -15,7 +15,7 @@ class NotesService {
     const updatedAt = createdAt;
 
     const query = {
-      text: 'INSERT INTO notes VALUES($1, $2, $3, $4, $5, $6)',
+      text: 'INSERT INTO notes VALUES($1, $2, $3, $4, $5, $6) RETURNING id',
       values: [id, title, body, tags, createdAt, updatedAt],
     };
 
@@ -40,6 +40,10 @@ class NotesService {
     }
 
     const result = await this._pool.query(query);
+
+    if (!result.rows[0]) {
+      throw new NotFoundError('Catatan tidak ditemukan');
+    }
     return result.rows.map(mapDBToModel)[0];
   }
 
@@ -56,12 +60,14 @@ class NotesService {
     if (!result.rows.length) {
       throw new NotFoundError('Catatan gagal di update. Id tidak ditemukan');
     }
+
+    return result;
   } 
 
   async deleteNoteById(id) {
     const query = {
       text: "DELETE FROM notes WHERE id=$1 RETURNING id",
-      values: [1]
+      values: [id]
     }
 
     const result = await this._pool.query(query);
@@ -69,6 +75,8 @@ class NotesService {
     if (!result.rows.length) {
       throw new NotFoundError('Catatan gagal dihapus. Id tidak ditemukan');
     }
+
+    return result;
   }
 }
 
