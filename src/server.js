@@ -44,7 +44,6 @@ const init = async () => {
 
     // penanganan client error secara internal.
     if (response instanceof Error) {
- 
       if (response instanceof ClientError) {
         const newResponse = h.response({
           status: 'fail',
@@ -67,7 +66,7 @@ const init = async () => {
     }
 
     return h.continue;
-  });    
+  });
 
   await server.start();
   console.log(`Server berjalan pada ${server.info.uri}`);
