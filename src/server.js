@@ -39,7 +39,7 @@ const init = async () => {
   await server.register([
     {
       plugin: Jwt,
-    }
+    },
   ]);
 
   // mendefinisikan strategy autentikasi jwt
@@ -63,16 +63,29 @@ const init = async () => {
   await server.register([
     {
       plugin: notesPlugin,
-      options: { service: notesService, validator: NotesValidator },
+      options: {
+        service: notesService,
+        validator: NotesValidator,
+      },
     },
     {
       plugin: usersPlugin,
-      options: { service: usersService, validator: UsersValidator },
+      options: {
+        service: usersService,
+        validator: UsersValidator,
+      },
     },
     {
       plugin: authenticationPlugin,
-      options: {service: {authenticationsService, usersService }, tokenManager: TokenManager, validator: authenticationsValidator}
-    }
+      options: {
+        service: {
+          authenticationsService,
+          usersService,
+        },
+        tokenManager: TokenManager,
+        validator: authenticationsValidator,
+      },
+    },
   ]);
 
   server.ext('onPreResponse', (request, h) => {
