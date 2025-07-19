@@ -13,7 +13,7 @@ const routes = (handler) => [
     method: 'GET',
     path: '/users',
     handler: handler.getUserByUsernameHandler,
-  }
+  },
 ];
 
 module.exports = routes;

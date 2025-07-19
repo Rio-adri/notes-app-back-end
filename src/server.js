@@ -27,7 +27,7 @@ const CollaborationsValidator = require('./validator/collaborations/index');
 const ClientError = require('./exceptions/ClientError');
 
 const init = async () => {
-  const collaborationsService = new CollaborationsService(); 
+  const collaborationsService = new CollaborationsService();
   const notesService = new NotesService();
   const usersService = new UsersService();
   const authenticationsService = new AuthenticationsService();
