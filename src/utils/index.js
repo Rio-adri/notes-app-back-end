@@ -5,6 +5,7 @@ const mapDBToModel = ({
   tags,
   created_at,
   update_at,
+  username
 }) => ({
   id,
   title,
@@ -12,6 +13,7 @@ const mapDBToModel = ({
   tags,
   createdAt: created_at,
   updateAt: update_at,
+  username
 });
 
 module.exports = { mapDBToModel };
